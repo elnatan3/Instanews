@@ -10,18 +10,20 @@ const categories = [
     { name: 'health', imageUrl: '/images/health.jpg' },
     { name: 'science', imageUrl: '/images/science.jpg' },
     { name: 'politics', imageUrl: '/images/politics.jpg' }
-  ];
-  
-
-// const categories = ['technology', 'sports', 'business', 'entertainment', 'health', 'science'];
+];
 
 function HomePage() {
     const [articles, setArticles] = useState([]);
-  
-    const handleCategoryClick = (category) => {
-      fetchNews(category.name).then(setArticles);
+    useEffect(() => {
+      // Fetch the latest news on component mount
+      fetchNews().then(news => setArticles(news.news)); // Adjust this line based on your fetchNews function's implementation
+    }, []);
+
+    // This function now simply fetches the latest news, ignoring the category
+    const handleCategoryClick = () => {
+      fetchNews().then(news => setArticles(news.news)); 
     };
-  
+    
     return (
       <div className="home-container">
         <header className="header">
@@ -33,7 +35,7 @@ function HomePage() {
             <button 
               key={index} 
               className="category-button" 
-              onClick={() => handleCategoryClick(category)}
+              onClick={handleCategoryClick}
               style={{ backgroundImage: `url(${category.imageUrl})` }}
             >
               {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
@@ -42,21 +44,21 @@ function HomePage() {
         </div>
         <NewsDisplay articles={articles} />
         <footer className="footer">
-        <div className="footer-content">
-          <p>&copy; {new Date().getFullYear()} All Rights Reserved. Elnatan Tesfa</p>
-          <div className="footer-links">
-            {categories.map((category, index) => (
-              <a 
-                key={index} 
-                href="#" // Replace # with your actual link if needed
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
-              </a>
-            ))}
+          <div className="footer-content">
+            <p>&copy; {new Date().getFullYear()} All Rights Reserved. Elnatan Tesfa</p>
+            <div className="footer-links">
+              {categories.map((category, index) => (
+                <a 
+                  key={index} 
+                  href="#" // Replace # with your actual link if needed
+                  onClick={handleCategoryClick}
+                >
+                  {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
       </div>
     );
   }
