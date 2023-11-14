@@ -11,6 +11,7 @@ const categories = [
     { name: 'science', imageUrl: '/images/science.jpg' },
     { name: 'politics', imageUrl: '/images/politics.jpg' }
   ];
+  
 
 // const categories = ['technology', 'sports', 'business', 'entertainment', 'health', 'science'];
 
