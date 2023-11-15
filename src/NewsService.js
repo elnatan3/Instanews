@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const fetchNews = async (category) => {
   const apiKey = "ND9a79963SBiUkPOFh1oa6agdrOLRjPzecXabEE6LfvbufWo";
+  const language = 'en'; // specify English language
   const url = `https://api.currentsapi.services/v1/latest-news`;
 
   try {
@@ -9,6 +10,7 @@ export const fetchNews = async (category) => {
       params: {
         apiKey: apiKey,
         category: category,
+        language: language, // add the language parameter
       },
     });
 

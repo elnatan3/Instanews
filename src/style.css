@@ -1,317 +1,326 @@
 .app {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #4867a1 0%, #2a5298 74%);
-    overflow: hidden; /* For any animations that might go outside the bounds */
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #4867a1 0%, #2a5298 74%);
+  overflow: hidden;
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 3.5em;
+  color: transparent;
+  -webkit-text-stroke: 2px black;
+  position: relative;
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 10px white, 0 0 20px #007bff;
   }
-  
-  .home-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8); /* Slightly transparent */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px); /* Blurring the background content */
+  100% {
+    text-shadow: 0 0 20px white, 0 0 30px #007bff;
   }
-  
-  .header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    z-index: 1; /* To ensure it's above any pseudo-elements */
-  }
-  
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px; bottom: -100px; left: -100px;
+  z-index: -1;
+  background: linear-gradient(45deg, #6b1839, #263238);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: rotateBackground 20s linear infinite;
+}
+
+@keyframes rotateBackground {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Text Animations */
+.header h1 {
+  animation: neonGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlow {
+  from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff; }
+  to { text-shadow: 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #007bff; }
+}
+
+.tagline {
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid orange; /* The typewriter cursor */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  perspective: 1500px;
+}
+
+
+.news-article {
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dark-mode-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white0; /* Sun-like color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dark-mode-toggle:hover {
+  background-color: white; /* Slightly different shade on hover */
+}
+
+/* Adjust the sun/moon colors for dark mode */
+.dark-mode .dark-mode-toggle {
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .header {
+  background-color: #333;
+}
+
+.dark-mode .news-article {
+  border-color: #444;
+  background-color: #222;
+}
+
+.dark-mode .news-article h3 {
+  color: #ddd;
+}
+
+.dark-mode .news-article a {
+  color: #fff;
+  background-color: #555;
+}
+
+.dark-mode .news-article a:hover {
+  color: #bbb;
+  background-color: transparent;
+  border-color: #bbb;
+}
+
+.dark-mode .published-date {
+  color: #aaa;
+}
+
+.dark-mode .footer {
+  background-color: #333;
+}
+
+.dark-mode .tagline{
+  color: white;
+}
+
+.tagline {
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid orange; /* The typewriter cursor */
+  animation: typing 3.5s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; border-right: 3px solid transparent; } /* Hide cursor at end */
+}
+
+@keyframes blink-caret {
+  50% { border-color: orange; }
+}
+
+/* Optional: Additional style to start blinking after typing is done */
+.tagline.finished {
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+/* Ensure readability and contrast in both modes */
+.news-article {
+  background-color: white; /* Explicit background for light mode */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+}
+
+
+
+.news-article:hover {
+  transform: scale(1.04); /* Slightly enlarging the news article */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Adding a deeper shadow */
+}
+
+.news-article img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.news-article h3 {
+  color: #1a202c;
+  transition: color 0.3s;
+}
+
+.news-article a {
+  color: #007bff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+.news-article a:hover {
+  background-color: transparent;
+  color: #007bff;
+  border-color: #007bff;
+  transform: translateY(-3px); /* Slight lift effect */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+
+
+.published-date {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.loading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #007bff;
+  animation: rotate 1s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.footer {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 5px;
+  transition: color 0.3s
+}
+
+/* Existing CSS here... */
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
   .header h1 {
-    margin: 0;
-    font-size: 3em;
-    color: transparent;
-    -webkit-text-stroke: 1px black;
-    position: relative;
-    animation: textGlow 2s ease-in-out infinite alternate;
-  }
-  
-  @keyframes textGlow {
-    0% {
-      text-shadow: 0 0 10px white, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #007bff, 0 0 60px #007bff, 0 0 70px #007bff;
-    }
-    100% {
-      text-shadow: 0 0 20px white, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #007bff, 0 0 60px #007bff, 0 0 70px #007bff, 0 0 80px #007bff;
-    }
+      font-size: 2em; /* Smaller font size for mobile */
+      -webkit-text-stroke: 1px black; /* Thinner text stroke */
   }
 
   .header::before {
-    content: '';
-    position: absolute;
-    top: -50px; right: -50px; bottom: -50px; left: -50px;
-    z-index: -1;
-    background: linear-gradient(45deg, #6b1839, #263238);
-    clip-path: circle(30% at right 80%);
-    animation: rotateBackground 10s linear infinite;
+      /* Adjustments for the rotating object to fit smaller screens */
+      top: -50px; right: -50px; bottom: -50px; left: -50px;
   }
-  
-  @keyframes rotateBackground {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  
-  .header h1::before,
-  .header h1::after {
-    content: 'Insta News';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: black;
-    -webkit-text-stroke: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 60%);
-    animation: moveSliding 5s linear infinite;
-  }
-  
-  .header h1::after {
-    clip-path: polygon(0 40%, 100% 40%, 100% 100%, 0 100%);
-    animation-direction: reverse;
-  }
-  
-  @keyframes moveSliding {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-  
-  
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: white;
-    transition: width 0.3s ease;
-  }
-  
-  .header:hover::after {
-    width: 50%;
-    left: 25%; /* Sliding line under header on hover */
-  }
-  
+
   .tagline {
-    color:black;
-    font-size: 1.2em;
-    animation: fadeInUp 2s ease-in-out;
-  }
-  
-  @keyframes fadeInUp {
-    0% {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .category-button {
-    /* ... existing styles ... */
-    animation: rotateIn 1s ease-in-out;
-  }
-  
-  @keyframes rotateIn {
-    0% {
-      transform: rotate(-360deg);
-      opacity: 0;
-    }
-    100% {
-      transform: rotate(0);
-      opacity: 1;
-    }
+      font-size: 1em; /* Smaller font size for mobile */
   }
 
-  .categories-section {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 30px;
+  .home-container, .footer-content {
+      padding: 10px; /* Smaller padding for narrower screens */
   }
-  
-  .category-button {
-    padding: 60px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px black;
-  }
-  
-  .category-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
-  
-  .news-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
-  
+
   .news-article {
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transform: scale(1);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+      width: 90%; /* Full width articles on smaller screens */
+      margin: 0 auto; /* Centering the articles */
   }
 
-  .news-article:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  .dark-mode-toggle {
+      top: 15px; /* Adjust position for better visibility */
+      right: 15px;
   }
-  
-  .news-article h3 {
-    background-color: lightblue;
-    color: black;
-    margin-top: 0;
-    padding: 10px 15px;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .news-article:hover h3 {
-    background-color: #0056b3;
-  }
-  
-  .news-article p {
-    padding: 0 15px;
-    transition: all 0.3s ease;
-  }
-  
-  .news-article a {
-    display: inline-block;
-    background-color: #28a745;
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    margin: 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .news-article a:hover {
-    background-color: #218838;
-  }
-  
-  
-  .footer {
-    background-color: #007bff;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-links a {
-    color: white;
-    text-decoration: none;
-    margin: 5px;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-links a:hover {
-    color: #ade8f4;
+}
+
+/* Additional styles for extremely small screens */
+@media screen and (max-width: 480px) {
+  .header h1 {
+      font-size: 1.5em; /* Even smaller font for very small screens */
   }
 
-  
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .home-container {
-      margin: 10px;
-      padding: 15px;
-    }
-  
-    .header h1 {
-      font-size: 2em; /* Smaller font size for mobile */
-    }
-  
-    .category-button {
-      padding: 30px; /* Smaller padding for category buttons */
-      font-size: 1em;
-    }
-  
-    .news-container {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust grid layout */
-    }
-  
-    .news-article h3 {
-      font-size: 1em;
-    }
-  
-    .footer-content {
-      flex-direction: column; /* Stack footer content vertically */
-    }
+  .tagline {
+      font-size: 0.8em; /* Smaller tagline font size */
   }
-
-  .category-button {
-    padding: 20px;
-    font-size: 0.9em;
-  }
-
-  /* Stacking the category buttons in a column on smaller screens */
-  
-
-  /* Responsive footer adjustments */
-  .footer {
-    padding: 15px 0;
-  }
-
-
-  .footer-links a {
-    margin: 4;
-    font-size: 0.6em;
-  }
-
-  
-  
-  /* Enhanced hover effect for news articles */
-  .news-article:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    z-index: 2;
-  }
-  
-
-  
-  
+}
